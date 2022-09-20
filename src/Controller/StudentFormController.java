@@ -96,10 +96,22 @@ public class StudentFormController {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
+        clearFieId();
     }
 
     public void btnStudentDeleteOnAction(ActionEvent actionEvent) {
-
+        try {
+            if (new StudentController().deleteStudent(txtSid.getText())){
+                new Alert(Alert.AlertType.CONFIRMATION, "Deleted Student...").show();
+                clearFieId();
+            }else {
+                new Alert(Alert.AlertType.WARNING, "Try again...").show();
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     public void clearFieId() {
