@@ -65,6 +65,7 @@ public class StudentFormController {
         try {
             if (addStudent(s1)) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Save Student...").show();
+                clearFieId();
             } else {
                 new Alert(Alert.AlertType.WARNING, "Try Again...").show();
             }
@@ -85,5 +86,14 @@ public class StudentFormController {
     public void btnStudentDeleteOnAction(ActionEvent actionEvent) {
     }
 
+    public void clearFieId() {
+        txtName.clear();
+        txtNic.clear();
+        txtContact.clear();
+        txtEmail.clear();
+        txtAddress.clear();
 
+        tblStudent.getSelectionModel().clearSelection();
+
+    }
 }
