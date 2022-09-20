@@ -26,7 +26,7 @@ public class StudentFormController {
 
     public void btnStudentSaveOnAction(ActionEvent actionEvent) {
         Student s1 = new Student(
-                txtSid.getText(),txtName.getText(),txtEmail.getText(),txtContact.getText(),txtAddress.getText(),txtNic.getId()
+                txtSid.getText(),txtName.getText(),txtEmail.getText(),txtContact.getText(),txtAddress.getText(),txtNic.getText()
         );
         try {
             if (addStudent(s1)){

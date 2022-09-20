@@ -13,7 +13,7 @@ public class StudentController implements StudentServices {
     @Override
     public boolean saveStudent(Student s1) throws SQLException, ClassNotFoundException {
         Connection con = DBConnection.getInstance().getConnection();
-        PreparedStatement pstm = con.prepareStatement("insert into student values (?,?,?,?,?,?)");
+        PreparedStatement pstm = con.prepareStatement("INSERT INTO student VALUES (?,?,?,?,?,?)");
         pstm.setObject(1,s1.getStudentId());
         pstm.setObject(2,s1.getStudentName());
         pstm.setObject(3,s1.getEmail());
@@ -21,8 +21,6 @@ public class StudentController implements StudentServices {
         pstm.setObject(5,s1.getAddress());
         pstm.setObject(6,s1.getNic());
         return (pstm.executeUpdate()>0);
-
-
 
     }
 
