@@ -1,6 +1,8 @@
 package Views.TM;
 
-public class StudentTM {
+import module.Student;
+
+public class StudentTM extends Student {
     private String studentId;
     private String studentName;
     private String email;
