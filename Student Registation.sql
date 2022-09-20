@@ -1,0 +1,89 @@
+CREATE DATABASE IF NOT EXISTS `Student Registation`;
+SHOW DATABASES;
+USE `Student Registation`;
+
+CREATE TABLE IF NOT EXISTS Student(
+    studentId VARCHAR(45) NOT NULL,
+    studentName VARCHAR(45) NOT NULL DEFAULT 'Unknown',
+    email TEXT,
+    contact VARCHAR(20) NOT NULL,
+    address TEXT,
+    nic VARCHAR(45),
+    CONSTRAINT PRIMARY KEY(studentId)
+    );
+SHOW TABLES;
+DESC Student;
+
+CREATE TABLE IF NOT EXISTS Teacher(
+    teacherId VARCHAR(45) NOT NULL,
+    teacherName VARCHAR(45) NOT NULL,
+    nic VARCHAR(45) NOT NULL,
+    contact VARCHAR(45) NOT NULL,
+    address TEXT,
+    CONSTRAINT PRIMARY KEY (teacherId)
+    );
+SHOW TABLES;
+DESC Teacher;
+
+CREATE TABLE IF NOT EXISTS Subject(
+    subId VARCHAR(45) NOT NULL,
+    subName VARCHAR(45),
+    credit DOUBLE,
+    teacherId VARCHAR(45) NOT NULL,
+    CONSTRAINT PRIMARY KEY (subId),
+    CONSTRAINT FOREIGN KEY (teacherId) REFERENCES Teacher (teacherId)
+    ON DELETE CASCADE ON UPDATE CASCADE
+    );
+SHOW TABLES;
+DESC Subject;
+
+CREATE TABLE IF NOT EXISTS Course(
+    courseId VARCHAR(45) NOT NULL,
+    courseName VARCHAR(45) NOT NULL,
+    cost DOUBLE,
+    duration VARCHAR(45),
+    subId VARCHAR(45) NOT NULL,
+    CONSTRAINT PRIMARY KEY (courseId),
+    CONSTRAINT FOREIGN KEY (subId) REFERENCES Subject (subId)
+    ON DELETE CASCADE ON UPDATE CASCADE
+    );
+SHOW TABLES;
+DESC Course;
+
+CREATE TABLE IF NOT EXISTS Intake(
+    intakeId VARCHAR(45) NOT NULL,
+    startDate DATE,
+    intakecol VARCHAR(45),
+    description VARCHAR(45),
+    courseId VARCHAR(45) NOT NULL,
+    CONSTRAINT PRIMARY KEY (intakeId),
+    CONSTRAINT FOREIGN KEY (courseId) REFERENCES Course (courseId)
+    ON DELETE CASCADE ON UPDATE CASCADE
+    );
+SHOW TABLES;
+DESC Intake;
+
+CREATE TABLE IF NOT EXISTS Registration(
+    regId VARCHAR(45) NOT NULL,
+    regDate DATE,
+    studentId VARCHAR(45) NOT NULL,
+    intakeId VARCHAR(45) NOT NULL,
+    CONSTRAINT PRIMARY KEY (regId),
+    CONSTRAINT FOREIGN KEY (studentId) REFERENCES Student (studentId),
+    CONSTRAINT FOREIGN KEY (intakeId) REFERENCES Intake (intakeId)
+    ON DELETE CASCADE ON UPDATE CASCADE
+    );
+SHOW TABLES;
+DESC Registration;
+
+CREATE TABLE IF NOT EXISTS Payment(
+    payId VARCHAR(45) NOT NULL,
+    date DATE,
+    cost DOUBLE,
+    regId VARCHAR(45) NOT NULL,
+    CONSTRAINT PRIMARY KEY (payId),
+    CONSTRAINT FOREIGN KEY (regId) REFERENCES Registration (regId)
+    ON DELETE CASCADE ON UPDATE CASCADE
+    );
+SHOW TABLES;
+DESC Payment;
