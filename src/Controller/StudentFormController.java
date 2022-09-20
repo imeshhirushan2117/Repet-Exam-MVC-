@@ -29,8 +29,9 @@ public class StudentFormController {
     public TableColumn colContact;
     public TableColumn colEmail;
     public TableColumn colAddress;
+    public TextField txtSearch;
 
-      public void initialize() {
+    public void initialize() {
           colSid.setCellValueFactory(new PropertyValueFactory<>("studentId"));
           colName.setCellValueFactory(new PropertyValueFactory<>("studentName"));
           colNic.setCellValueFactory(new PropertyValueFactory<>("nic"));
@@ -81,6 +82,20 @@ public class StudentFormController {
     }
 
     public void btnStudentUpdateOnAction(ActionEvent actionEvent) {
+        Student s1 = new Student(
+                txtSid.getText(),txtName.getText(),txtEmail.getText(),txtContact.getText(),
+                txtAddress.getText(),txtNic.getText()
+        );
+        try {
+            if (new StudentController().updateStudent(s1))
+                new Alert(Alert.AlertType.CONFIRMATION,"Updated Student...").show();
+            else
+                new Alert(Alert.AlertType.WARNING,"Try again...").show();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     public void btnStudentDeleteOnAction(ActionEvent actionEvent) {
@@ -95,5 +110,23 @@ public class StudentFormController {
 
         tblStudent.getSelectionModel().clearSelection();
 
+    }
+
+    public void btnSearchOnAction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
+        String studentId = txtSearch.getText();
+        Student s1 = new StudentController().getStudent(studentId);
+        if (s1==null){
+            new Alert(Alert.AlertType.WARNING, "Empty Result SET...").show();
+        }else {
+            setData(s1);
+        }
+    }
+    private void setData(Student s1) {
+        txtSid.setText(s1.getStudentId());
+        txtName.setText(s1.getStudentName());
+        txtEmail.setText(s1.getEmail());
+        txtContact.setText(s1.getContact());
+        txtAddress.setText(s1.getAddress());
+        txtNic.setText(s1.getNic());
     }
 }
