@@ -45,7 +45,7 @@ public class StudentController implements StudentServices {
     @Override
     public Student getStudent(String studentId) throws SQLException, ClassNotFoundException {
         PreparedStatement pstm = DBConnection.getInstance().getConnection()
-                .prepareStatement("select * from student where studentId=?");
+                .prepareStatement("SELECT * FROM student WHERE studentId=?");
         pstm.setObject(1,studentId);
         ResultSet rst = pstm.executeQuery();
         if (rst.next()){
