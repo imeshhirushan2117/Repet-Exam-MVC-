@@ -12,7 +12,7 @@ public class StudentFormController {
     public TextField txtContact;
     public TextField txtNic;
     public TextField txtAddress;
-    public TableView tblStudent;
+    public TableView<String> tblStudent;
     public TableColumn colSid;
     public TableColumn colName;
     public TableColumn colNic;
